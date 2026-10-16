@@ -7,3 +7,11 @@ target
 .idea
 .vscode
 *.log
+# Never send private deployment material to a Docker build context.
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+.erlang.cookie
+secrets/
