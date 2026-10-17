@@ -2,6 +2,7 @@ package cl.barriodigital.notify.messaging;
 
 import java.io.IOException;
 import cl.barriodigital.notify.event.Command;
+import cl.barriodigital.notify.config.NotifyRabbitTopologyConfig;
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -15,17 +16,17 @@ public class CommandListeners {
         this.processor = processor;
     }
 
-    @RabbitListener(id = "notify-email", queues = "q.cmd.email", containerFactory = "notifyListenerFactory")
+    @RabbitListener(id = "notify-email", queues = NotifyRabbitTopologyConfig.EMAIL_QUEUE, containerFactory = "notifyListenerFactory")
     public void email(Message message, Channel channel) throws IOException {
         processor.process(Command.EMAIL, message, channel);
     }
 
-    @RabbitListener(id = "notify-crew", queues = "q.cmd.crew", containerFactory = "notifyListenerFactory")
+    @RabbitListener(id = "notify-crew", queues = NotifyRabbitTopologyConfig.CREW_QUEUE, containerFactory = "notifyListenerFactory")
     public void crew(Message message, Channel channel) throws IOException {
         processor.process(Command.CREW, message, channel);
     }
 
-    @RabbitListener(id = "notify-certificate", queues = "q.cmd.certificate", containerFactory = "notifyListenerFactory")
+    @RabbitListener(id = "notify-certificate", queues = NotifyRabbitTopologyConfig.CERTIFICATE_QUEUE, containerFactory = "notifyListenerFactory")
     public void certificate(Message message, Channel channel) throws IOException {
         processor.process(Command.CERTIFICATE, message, channel);
     }

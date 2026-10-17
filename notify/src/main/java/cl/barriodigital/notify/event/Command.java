@@ -1,9 +1,11 @@
 package cl.barriodigital.notify.event;
 
+import cl.barriodigital.notify.config.NotifyRabbitTopologyConfig;
+
 public enum Command {
-    EMAIL("email.send", "q.cmd.email"),
-    CREW("crew.ticket", "q.cmd.crew"),
-    CERTIFICATE("certificate.gen", "q.cmd.certificate");
+    EMAIL(NotifyRabbitTopologyConfig.EMAIL_KEY, NotifyRabbitTopologyConfig.EMAIL_QUEUE),
+    CREW(NotifyRabbitTopologyConfig.CREW_KEY, NotifyRabbitTopologyConfig.CREW_QUEUE),
+    CERTIFICATE(NotifyRabbitTopologyConfig.CERTIFICATE_KEY, NotifyRabbitTopologyConfig.CERTIFICATE_QUEUE);
 
     private final String routingKey;
     private final String queue;
